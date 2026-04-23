@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Role: ADMIN, GURU, WALI
+// AttendanceStatus: HADIR, IZIN, SAKIT, ALPHA
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  role      String
+  image     String?
+  guru      Guru?    @relation(fields: [guruId], references: [id])
+  guruId    String?  @unique
+  santri    Santri[] @relation("ParentSantri")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Guru {
+  id        String   @id @default(uuid())
+  name      String
+  nip       String   @unique
+  phone     String?
+  user      User?
+  classes   Kelas[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Santri {
+  id        String      @id @default(uuid())
+  name      String
+  nis       String      @unique
+  kelas     Kelas       @relation(fields: [kelasId], references: [id])
+  kelasId   String
+  parent    User?       @relation("ParentSantri", fields: [parentId], references: [id])
+  parentId  String?
+  absensi   Absensi[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Kelas {
+  id        String   @id @default(uuid())
+  name      String
+  guru      Guru     @relation(fields: [guruId], references: [id])
+  guruId    String
+  santri    Santri[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Absensi {
+  id        String   @id @default(uuid())
+  date      DateTime @default(now())
+  status    String
+  notes     String?
+  santri    Santri   @relation(fields: [santriId], references: [id])
+  santriId  String
+  guruId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
