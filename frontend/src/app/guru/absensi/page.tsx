@@ -32,7 +32,7 @@ export default function AbsensiPage() {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/guru/my-classes", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/guru/my-classes`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
@@ -54,13 +54,13 @@ export default function AbsensiPage() {
       setLoading(true);
       try {
         // 1. Fetch santri list
-        const resSantri = await fetch(`http://localhost:5000/api/guru/class/${selectedKelas}/santri`, {
+        const resSantri = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/guru/class/${selectedKelas}/santri`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const dataSantri = await resSantri.json();
         
         // 2. Fetch existing attendance for this date
-        const resHistory = await fetch(`http://localhost:5000/api/guru/history/${selectedKelas}?date=${selectedDate}`, {
+        const resHistory = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/guru/history/${selectedKelas}?date=${selectedDate}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const dataHistory = await resHistory.json();
@@ -119,7 +119,7 @@ export default function AbsensiPage() {
         notes: notesData[s.id]
       }));
 
-      const res = await fetch("http://localhost:5000/api/guru/absensi", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/guru/absensi`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -155,17 +155,17 @@ export default function AbsensiPage() {
           <div className="relative group flex-1 md:flex-none">
             <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-primary" size={18} />
             <input 
-              type="date"
+              type="date`
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
-              className="bg-white border border-gray-200 rounded-xl pl-10 pr-4 py-2.5 focus:ring-2 focus:ring-primary/20 outline-none w-full"
+              className="bg-white border border-gray-200 rounded-xl pl-10 pr-4 py-2.5 focus:ring-2 focus:ring-primary/20 outline-none w-full`
             />
           </div>
 
           <select 
             value={selectedKelas} 
             onChange={(e) => setSelectedKelas(e.target.value)}
-            className="bg-white border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-primary/20 outline-none flex-1 md:flex-none"
+            className="bg-white border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-primary/20 outline-none flex-1 md:flex-none`
           >
             {classes.map(k => (
               <option key={k.id} value={k.id}>{k.name}</option>
@@ -178,7 +178,7 @@ export default function AbsensiPage() {
             className={`
               flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold transition-all shadow-lg
               ${isAlreadyFilled 
-                ? "bg-slate-100 text-slate-400 cursor-not-allowed shadow-none" 
+                ? "bg-slate-100 text-slate-400 cursor-not-allowed shadow-none`
                 : "bg-primary text-white hover:bg-blue-600 shadow-primary/20"}
             `}
           >
@@ -232,9 +232,9 @@ export default function AbsensiPage() {
                       <td key={status} className="px-6 py-4 text-center">
                         <label className={`relative ${isAlreadyFilled ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
                           <input 
-                            type="radio" 
+                            type="radio`
                             name={`status-${santri.id}`} 
-                            className="sr-only peer"
+                            className="sr-only peer`
                             checked={absensiData[santri.id] === status}
                             onChange={() => handleStatusChange(santri.id, status)}
                             disabled={isAlreadyFilled}
@@ -242,7 +242,7 @@ export default function AbsensiPage() {
                           <div className={`
                             w-7 h-7 rounded-full border-2 mx-auto flex items-center justify-center transition-all duration-200
                             ${absensiData[santri.id] === status 
-                              ? "bg-primary border-primary text-white scale-110 shadow-lg shadow-primary/30" 
+                              ? "bg-primary border-primary text-white scale-110 shadow-lg shadow-primary/30`
                               : "border-slate-200 bg-white hover:border-slate-300"}
                           `}>
                             {absensiData[santri.id] === status && <Check size={16} strokeWidth={4} />}
@@ -252,8 +252,8 @@ export default function AbsensiPage() {
                     ))}
                     <td className="px-6 py-4">
                       <input 
-                        type="text" 
-                        placeholder="Tambahkan catatan..."
+                        type="text`
+                        placeholder="Tambahkan catatan...`
                         disabled={isAlreadyFilled}
                         className={`
                           w-full border rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all

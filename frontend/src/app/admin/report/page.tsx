@@ -20,8 +20,8 @@ export default function AdminReportPage() {
     try {
       // Fetch classes and santri (with attendance)
       const [resKelas, resSantri] = await Promise.all([
-        fetch("http://localhost:5000/api/admin/kelas", { headers: { Authorization: `Bearer ${token}` } }),
-        fetch("http://localhost:5000/api/admin/santri", { headers: { Authorization: `Bearer ${token}` } })
+        fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/kelas`, { headers: { Authorization: `Bearer ${token}` } }),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/santri`, { headers: { Authorization: `Bearer ${token}` } })
       ]);
       
       const dataKelas = await resKelas.json();
@@ -109,7 +109,7 @@ export default function AdminReportPage() {
         
         <button 
           onClick={handleExport}
-          className="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-green-600/20 transition-all font-bold"
+          className="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-green-600/20 transition-all font-bold`
         >
           <FileDown size={18} />
           Export Ke Excel
@@ -125,7 +125,7 @@ export default function AdminReportPage() {
               <select 
                 value={selectedKelas}
                 onChange={(e) => setSelectedKelas(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-12 pr-4 outline-none focus:ring-2 focus:ring-primary/20 appearance-none font-medium text-slate-700"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-12 pr-4 outline-none focus:ring-2 focus:ring-primary/20 appearance-none font-medium text-slate-700`
               >
                 <option value="all">Semua Kelas</option>
                 {classes.map(k => (
@@ -140,9 +140,9 @@ export default function AdminReportPage() {
             <div className="relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
               <input 
-                type="text" 
-                placeholder="Ketik nama atau NIS santri..."
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-12 pr-4 outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                type="text`
+                placeholder="Ketik nama atau NIS santri...`
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-12 pr-4 outline-none focus:ring-2 focus:ring-primary/20 transition-all`
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -154,15 +154,15 @@ export default function AdminReportPage() {
             <div className="relative">
               <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
               <input 
-                type="date" 
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-12 pr-4 outline-none focus:ring-2 focus:ring-primary/20 transition-all text-slate-700"
+                type="date`
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-12 pr-4 outline-none focus:ring-2 focus:ring-primary/20 transition-all text-slate-700`
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
               />
               {selectedDate && (
                 <button 
                   onClick={() => setSelectedDate("")}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] bg-slate-200 hover:bg-slate-300 text-slate-600 px-2 py-1 rounded-md font-bold transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] bg-slate-200 hover:bg-slate-300 text-slate-600 px-2 py-1 rounded-md font-bold transition-colors`
                 >
                   RESET
                 </button>

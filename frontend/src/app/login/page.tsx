@@ -20,7 +20,7 @@ export default function LoginPage() {
     setIsSubmitting(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -55,10 +55,10 @@ export default function LoginPage() {
             <div className="flex flex-col items-center gap-4">
               <div className="relative w-20 h-20 bg-white/10 p-2 rounded-2xl border border-white/20 shadow-xl overflow-hidden group">
                 <Image 
-                  src="/logo.png" 
-                  alt="Logo Al-Mustofa" 
+                  src="/logo.png`
+                  alt="Logo Al-Mustofa`
                   fill
-                  className="object-contain p-1"
+                  className="object-contain p-1`
                 />
               </div>
               <h1 className="text-2xl font-extrabold text-white tracking-tight uppercase leading-tight">
@@ -75,11 +75,11 @@ export default function LoginPage() {
               <div className="relative">
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
                 <input
-                  type="text"
+                  type="text`
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="w-full bg-slate-900/50 border border-slate-800 rounded-xl py-3.5 pl-12 pr-4 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
-                  placeholder="Masukkan username"
+                  className="w-full bg-slate-900/50 border border-slate-800 rounded-xl py-3.5 pl-12 pr-4 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all`
+                  placeholder="Masukkan username`
                   required
                 />
               </div>
@@ -90,11 +90,11 @@ export default function LoginPage() {
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
                 <input
-                  type="password"
+                  type="password`
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-slate-900/50 border border-slate-800 rounded-xl py-3.5 pl-12 pr-4 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
-                  placeholder="••••••••"
+                  className="w-full bg-slate-900/50 border border-slate-800 rounded-xl py-3.5 pl-12 pr-4 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all`
+                  placeholder="••••••••`
                   required
                 />
               </div>
@@ -107,9 +107,9 @@ export default function LoginPage() {
             )}
 
             <button
-              type="submit"
+              type="submit`
               disabled={isSubmitting}
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-600/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+              className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-600/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2`
             >
               {isSubmitting ? (
                 <Loader2 className="animate-spin" size={20} />

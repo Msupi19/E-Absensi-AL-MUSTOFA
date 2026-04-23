@@ -14,7 +14,7 @@ export default function GuruDashboard() {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/guru/my-classes", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/guru/my-classes`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();

@@ -18,8 +18,8 @@ export default function AdminKelasPage() {
     setLoading(true);
     try {
       const [resKelas, resGuru] = await Promise.all([
-        fetch("http://localhost:5000/api/admin/kelas", { headers: { Authorization: `Bearer ${token}` } }),
-        fetch("http://localhost:5000/api/admin/guru", { headers: { Authorization: `Bearer ${token}` } })
+        fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/kelas`, { headers: { Authorization: `Bearer ${token}` } }),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/guru`, { headers: { Authorization: `Bearer ${token}` } })
       ]);
       const dataKelas = await resKelas.json();
       const dataGuru = await resGuru.json();
@@ -51,8 +51,8 @@ export default function AdminKelasPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const url = editingKelas 
-      ? `http://localhost:5000/api/admin/kelas/${editingKelas.id}`
-      : "http://localhost:5000/api/admin/kelas";
+      ? `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/kelas/${editingKelas.id}`
+      : `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/kelas`;
     const method = editingKelas ? "PUT" : "POST";
 
     try {
@@ -79,7 +79,7 @@ export default function AdminKelasPage() {
   const handleDelete = async (id: string) => {
     if (!confirm("Apakah Anda yakin ingin menghapus kelas ini?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/kelas/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/kelas/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -124,16 +124,16 @@ export default function AdminKelasPage() {
                    <label className="text-sm font-bold text-slate-700 ml-1">Nama Kelas</label>
                    <input 
                       type="text" required
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3.5 outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3.5 outline-none focus:ring-2 focus:ring-primary/20 transition-all`
                       value={formData.name}
                       onChange={e => setFormData({...formData, name: e.target.value})}
-                      placeholder="Contoh: 10A, 11B..."
+                      placeholder="Contoh: 10A, 11B...`
                    />
                 </div>
                 <div className="space-y-2">
                    <label className="text-sm font-bold text-slate-700 ml-1">Guru Pengampu</label>
                    <select 
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3.5 outline-none focus:ring-2 focus:ring-primary/20 transition-all appearance-none"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3.5 outline-none focus:ring-2 focus:ring-primary/20 transition-all appearance-none`
                       value={formData.guruId}
                       onChange={e => setFormData({...formData, guruId: e.target.value})}
                    >
@@ -188,13 +188,13 @@ export default function AdminKelasPage() {
                        <div className="flex justify-end gap-2">
                           <button 
                             onClick={() => handleOpenEdit(kelas)}
-                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors`
                           >
                             <Edit size={18} />
                           </button>
                           <button 
                             onClick={() => handleDelete(kelas.id)} 
-                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors`
                           >
                             <Trash2 size={18} />
                           </button>

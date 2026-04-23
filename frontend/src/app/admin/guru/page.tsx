@@ -14,13 +14,13 @@ export default function AdminGuruPage() {
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newGuru, setNewGuru] = useState({
-    name: "", nip: "", phone: "", username: "", password: ""
+    name: "", nip: "", phone: "", username: "", password: "`
   });
 
   const fetchGurus = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/admin/guru", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/guru`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -39,7 +39,7 @@ export default function AdminGuruPage() {
   const handleDelete = async (id: string) => {
     if (!confirm("Apakah Anda yakin ingin menghapus data guru ini?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/guru/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/guru/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -58,7 +58,7 @@ export default function AdminGuruPage() {
   const handleAddGuru = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/admin/guru", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/guru`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,7 +95,7 @@ export default function AdminGuruPage() {
         
         <button 
           onClick={() => setIsModalOpen(true)}
-          className="btn-primary flex items-center gap-2"
+          className="btn-primary flex items-center gap-2`
         >
           <Plus size={18} />
           Tambah Guru Baru
@@ -118,7 +118,7 @@ export default function AdminGuruPage() {
                   <label className="text-sm font-semibold text-slate-600">Nama Lengkap</label>
                   <input 
                     type="text" required
-                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20"
+                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20`
                     value={newGuru.name}
                     onChange={e => setNewGuru({...newGuru, name: e.target.value})}
                   />
@@ -127,7 +127,7 @@ export default function AdminGuruPage() {
                   <label className="text-sm font-semibold text-slate-600">NIP</label>
                   <input 
                     type="text" required
-                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20"
+                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20`
                     value={newGuru.nip}
                     onChange={e => setNewGuru({...newGuru, nip: e.target.value})}
                   />
@@ -135,8 +135,8 @@ export default function AdminGuruPage() {
                 <div className="space-y-1">
                   <label className="text-sm font-semibold text-slate-600">No. WhatsApp</label>
                   <input 
-                    type="text"
-                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20"
+                    type="text`
+                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20`
                     value={newGuru.phone}
                     onChange={e => setNewGuru({...newGuru, phone: e.target.value})}
                   />
@@ -148,7 +148,7 @@ export default function AdminGuruPage() {
                   <label className="text-sm font-semibold text-slate-600">Username</label>
                   <input 
                     type="text" required
-                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20"
+                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20`
                     value={newGuru.username}
                     onChange={e => setNewGuru({...newGuru, username: e.target.value})}
                   />
@@ -157,7 +157,7 @@ export default function AdminGuruPage() {
                   <label className="text-sm font-semibold text-slate-600">Password</label>
                   <input 
                     type="password" required
-                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20"
+                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20`
                     value={newGuru.password}
                     onChange={e => setNewGuru({...newGuru, password: e.target.value})}
                   />
@@ -175,9 +175,9 @@ export default function AdminGuruPage() {
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
           <input 
-            type="text" 
-            placeholder="Cari guru berdasarkan nama atau NIP..."
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+            type="text`
+            placeholder="Cari guru berdasarkan nama atau NIP...`
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all`
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -225,7 +225,7 @@ export default function AdminGuruPage() {
                         </button>
                         <button 
                           onClick={() => handleDelete(guru.id)}
-                          className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                          className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors`
                         >
                           <Trash2 size={18} />
                         </button>

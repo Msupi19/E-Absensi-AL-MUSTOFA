@@ -15,13 +15,13 @@ export default function AdminSantriPage() {
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newSantri, setNewSantri] = useState({
-    name: "", nis: "", kelasId: "", parentUsername: "", parentPassword: ""
+    name: "", nis: "", kelasId: "", parentUsername: "", parentPassword: "`
   });
 
   const fetchSantri = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/admin/santri", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/santri`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -35,7 +35,7 @@ export default function AdminSantriPage() {
 
   const fetchClasses = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/admin/kelas", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/kelas`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -56,7 +56,7 @@ export default function AdminSantriPage() {
   const handleDelete = async (id: string) => {
     if (!confirm("Apakah Anda yakin ingin menghapus data santri ini?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/santri/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/santri/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -71,7 +71,7 @@ export default function AdminSantriPage() {
   const handleAddSantri = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/admin/santri", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/santri`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,7 +107,7 @@ export default function AdminSantriPage() {
         
         <button 
           onClick={() => setIsModalOpen(true)}
-          className="btn-primary flex items-center gap-2"
+          className="btn-primary flex items-center gap-2`
         >
           <Plus size={18} />
           Tambah Santri Baru
@@ -130,7 +130,7 @@ export default function AdminSantriPage() {
                   <label className="text-sm font-semibold text-slate-600">Nama Lengkap Santri</label>
                   <input 
                     type="text" required
-                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20"
+                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20`
                     value={newSantri.name}
                     onChange={e => setNewSantri({...newSantri, name: e.target.value})}
                   />
@@ -139,7 +139,7 @@ export default function AdminSantriPage() {
                   <label className="text-sm font-semibold text-slate-600">NIS</label>
                   <input 
                     type="text" required
-                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20"
+                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20`
                     value={newSantri.nis}
                     onChange={e => setNewSantri({...newSantri, nis: e.target.value})}
                   />
@@ -147,7 +147,7 @@ export default function AdminSantriPage() {
                 <div className="space-y-1">
                   <label className="text-sm font-semibold text-slate-600">Pilih Kelas</label>
                   <select 
-                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20"
+                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20`
                     value={newSantri.kelasId}
                     onChange={e => setNewSantri({...newSantri, kelasId: e.target.value})}
                   >
@@ -163,7 +163,7 @@ export default function AdminSantriPage() {
                   <label className="text-sm font-semibold text-slate-600">Username Wali</label>
                   <input 
                     type="text" required
-                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20"
+                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20`
                     value={newSantri.parentUsername}
                     onChange={e => setNewSantri({...newSantri, parentUsername: e.target.value})}
                   />
@@ -172,7 +172,7 @@ export default function AdminSantriPage() {
                   <label className="text-sm font-semibold text-slate-600">Password Wali</label>
                   <input 
                     type="password" required
-                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20"
+                    className="w-full bg-slate-50 border rounded-xl p-3 outline-none focus:ring-2 focus:ring-primary/20`
                     value={newSantri.parentPassword}
                     onChange={e => setNewSantri({...newSantri, parentPassword: e.target.value})}
                   />
@@ -190,9 +190,9 @@ export default function AdminSantriPage() {
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
           <input 
-            type="text" 
-            placeholder="Cari santri berdasarkan nama atau NIS..."
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+            type="text`
+            placeholder="Cari santri berdasarkan nama atau NIS...`
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all`
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -240,7 +240,7 @@ export default function AdminSantriPage() {
                         </button>
                         <button 
                           onClick={() => handleDelete(santri.id)}
-                          className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                          className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors`
                         >
                           <Trash2 size={18} />
                         </button>

@@ -16,7 +16,7 @@ export default function ParentDashboard() {
     const fetchChildData = async () => {
       try {
         // 1. Get my children
-        const childrenRes = await fetch("http://localhost:5000/api/wali/my-children", {
+        const childrenRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/wali/my-children`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const children = await childrenRes.json();
@@ -24,7 +24,7 @@ export default function ParentDashboard() {
         if (childrenRes.ok && children.length > 0) {
           const childId = children[0].id;
           // 2. Get report for first child
-          const reportRes = await fetch(`http://localhost:5000/api/wali/report/${childId}`, {
+          const reportRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/wali/report/${childId}`, {
             headers: { Authorization: `Bearer ${token}` }
           });
           const report = await reportRes.json();
@@ -90,7 +90,7 @@ export default function ParentDashboard() {
     const tableData = childData.absensi.map((a: any) => [
       new Date(a.date).toLocaleDateString('id-ID'),
       a.status,
-      a.notes || "-"
+      a.notes || "-`
     ]);
 
     autoTable(doc, {
@@ -222,7 +222,7 @@ export default function ParentDashboard() {
 
           <button 
             onClick={handleDownloadPDF}
-            className="w-full btn-primary flex items-center justify-center gap-2 py-4 shadow-blue-600/20 shadow-lg"
+            className="w-full btn-primary flex items-center justify-center gap-2 py-4 shadow-blue-600/20 shadow-lg`
           >
             <FileText size={18} />
             Unduh Laporan Lengkap (PDF)

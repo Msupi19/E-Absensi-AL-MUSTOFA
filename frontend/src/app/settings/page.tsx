@@ -40,7 +40,7 @@ export default function SettingsPage() {
     formData.append("image", file);
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/upload-profile", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/auth/upload-profile`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`
@@ -78,7 +78,7 @@ export default function SettingsPage() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/auth/change-password", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/auth/change-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -128,10 +128,10 @@ export default function SettingsPage() {
               <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-xl bg-slate-100 flex items-center justify-center relative">
                 {previewImage || user?.image ? (
                   <Image 
-                    src={previewImage || `http://localhost:5000${user?.image}`} 
-                    alt="Profile Preview" 
+                    src={previewImage || `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}${user?.image}`} 
+                    alt="Profile Preview`
                     fill
-                    className="object-cover"
+                    className="object-cover`
                   />
                 ) : (
                   <User size={64} className="text-slate-300" />
@@ -147,9 +147,9 @@ export default function SettingsPage() {
               <label className="absolute bottom-1 right-1 bg-primary text-white p-2.5 rounded-full shadow-lg cursor-pointer hover:scale-110 transition-transform active:scale-95">
                 <Camera size={20} />
                 <input 
-                  type="file" 
-                  className="hidden" 
-                  accept="image/*" 
+                  type="file`
+                  className="hidden`
+                  accept="image/*`
                   onChange={handleImageChange}
                   disabled={uploading}
                 />
@@ -177,7 +177,7 @@ export default function SettingsPage() {
           <form onSubmit={handleChangePassword} className="space-y-6">
             {message.text && (
               <div className={`p-4 rounded-xl flex items-center gap-3 ${
-                message.type === "success" ? "bg-green-50 text-green-700 border border-green-100" : "bg-red-50 text-red-700 border border-red-100"
+                message.type === "success" ? "bg-green-50 text-green-700 border border-green-100" : "bg-red-50 text-red-700 border border-red-100`
               }`}>
                 {message.type === "success" ? <ShieldCheck size={20} /> : <AlertCircle size={20} />}
                 <p className="text-sm font-bold">{message.text}</p>
@@ -187,10 +187,10 @@ export default function SettingsPage() {
             <div className="space-y-2">
               <label className="text-sm font-bold text-slate-700 ml-1">Password Saat Ini</label>
               <input 
-                type="password"
+                type="password`
                 required
-                placeholder="••••••••"
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                placeholder="••••••••`
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-primary/20 transition-all`
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
               />
@@ -200,10 +200,10 @@ export default function SettingsPage() {
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-700 ml-1">Password Baru</label>
                 <input 
-                  type="password"
+                  type="password`
                   required
-                  placeholder="••••••••"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                  placeholder="••••••••`
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-primary/20 transition-all`
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
@@ -212,10 +212,10 @@ export default function SettingsPage() {
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-700 ml-1">Konfirmasi Password Baru</label>
                 <input 
-                  type="password"
+                  type="password`
                   required
-                  placeholder="••••••••"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                  placeholder="••••••••`
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-primary/20 transition-all`
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
@@ -224,9 +224,9 @@ export default function SettingsPage() {
 
             <div className="pt-4">
               <button 
-                type="submit"
+                type="submit`
                 disabled={loading}
-                className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2"
+                className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2`
               >
                 {loading ? <Loader2 className="animate-spin" size={20} /> : <Save size={20} />}
                 Simpan Perubahan Password

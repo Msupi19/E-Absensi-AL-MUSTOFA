@@ -20,7 +20,7 @@ export default function ParentReportPage() {
   useEffect(() => {
     const fetchChildren = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/wali/my-children", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/wali/my-children`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
@@ -44,7 +44,7 @@ export default function ParentReportPage() {
       if (!selectedChild) return;
       setReportLoading(true);
       try {
-        const res = await fetch(`http://localhost:5000/api/wali/report/${selectedChild}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/wali/report/${selectedChild}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
@@ -115,7 +115,7 @@ export default function ParentReportPage() {
     const tableData = filteredAbsensi.map((a: any) => [
       new Date(a.date).toLocaleDateString('id-ID'),
       a.status,
-      a.notes || "-"
+      a.notes || "-`
     ]);
 
     autoTable(doc, {
@@ -150,14 +150,14 @@ export default function ParentReportPage() {
           <div className="flex gap-2">
             <button 
               onClick={handleExport}
-              className="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-green-600/20 transition-all font-bold"
+              className="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-green-600/20 transition-all font-bold`
             >
               <FileDown size={18} />
               Excel
             </button>
             <button 
               onClick={handleDownloadPDF}
-              className="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-red-600/20 transition-all font-bold"
+              className="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-red-600/20 transition-all font-bold`
             >
               <FileText size={18} />
               PDF
@@ -177,8 +177,8 @@ export default function ParentReportPage() {
                   onClick={() => setSelectedChild(child.id)}
                   className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all border ${
                     selectedChild === child.id 
-                    ? "bg-primary/5 border-primary text-primary font-bold" 
-                    : "bg-white border-slate-100 text-slate-600 hover:bg-slate-50"
+                    ? "bg-primary/5 border-primary text-primary font-bold`
+                    : "bg-white border-slate-100 text-slate-600 hover:bg-slate-50`
                   }`}
                 >
                   <div className={`p-2 rounded-lg ${selectedChild === child.id ? "bg-primary text-white" : "bg-slate-100 text-slate-400"}`}>
@@ -233,8 +233,8 @@ export default function ParentReportPage() {
               <div className="relative w-full md:w-64">
                 <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                 <input 
-                  type="date" 
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 pl-12 pr-4 outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm text-slate-700"
+                  type="date`
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 pl-12 pr-4 outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm text-slate-700`
                   value={selectedDate}
                   onChange={(e) => setSelectedDate(e.target.value)}
                 />

@@ -66,7 +66,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Sidebar Mobile Toggle */}
       <button 
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 bg-primary text-white p-2 rounded-lg"
+        className="lg:hidden fixed top-4 left-4 z-50 bg-primary text-white p-2 rounded-lg`
       >
         {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
@@ -80,10 +80,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div className="flex flex-col items-center mb-10">
             <div className="relative w-16 h-16 mb-4">
               <Image 
-                src="/logo.png" 
-                alt="Logo" 
+                src="/logo.png`
+                alt="Logo`
                 fill
-                className="object-contain"
+                className="object-contain`
               />
             </div>
             <h2 className="text-xl font-black text-center leading-tight uppercase tracking-tighter">
@@ -115,7 +115,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <div className="absolute bottom-0 w-full p-6 border-t border-white/10">
           <button 
             onClick={logout}
-            className="flex items-center gap-3 text-blue-200 hover:text-white transition-colors w-full"
+            className="flex items-center gap-3 text-blue-200 hover:text-white transition-colors w-full`
           >
             <LogOut size={20} />
             Keluar
@@ -139,11 +139,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <div className="bg-blue-100 rounded-full text-primary overflow-hidden w-10 h-10 flex items-center justify-center border-2 border-white shadow-sm">
               {user?.image ? (
                 <Image 
-                  src={`http://localhost:5000${user.image}`} 
-                  alt="Profile" 
+                  src={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}${user.image}`} 
+                  alt="Profile`
                   width={40} 
                   height={40} 
-                  className="object-cover w-full h-full"
+                  className="object-cover w-full h-full`
                 />
               ) : (
                 <UserCircle size={28} />
@@ -162,7 +162,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {isSidebarOpen && (
         <div 
           onClick={() => setIsSidebarOpen(false)}
-          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden`
         />
       )}
     </div>
