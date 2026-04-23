@@ -90,7 +90,7 @@ export default function ParentDashboard() {
     const tableData = childData.absensi.map((a: any) => [
       new Date(a.date).toLocaleDateString('id-ID'),
       a.status,
-      a.notes || "-`
+      a.notes || "-"
     ]);
 
     autoTable(doc, {
@@ -222,7 +222,7 @@ export default function ParentDashboard() {
 
           <button 
             onClick={handleDownloadPDF}
-            className="w-full btn-primary flex items-center justify-center gap-2 py-4 shadow-blue-600/20 shadow-lg`
+            className="w-full btn-primary flex items-center justify-center gap-2 py-4 shadow-blue-600/20 shadow-lg"
           >
             <FileText size={18} />
             Unduh Laporan Lengkap (PDF)
